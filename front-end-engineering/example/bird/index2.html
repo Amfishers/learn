@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+#canvas {width: 400px; height: 600px; margin: 0 auto; background-color: green;}
+</style>
+<script>
+//游戏相关数据尽量使用全局变量
+var ctx;
+var time; //定时器关闭，游戏就结束
+var distance = 150;
+//控制难度
+var speed = 6; //小鸟下落速度
+var pipeSpeed = 10;//管道速度
+
+var birdIndex = 0;
+var score = 0;
+var flag = false;
+
+//背景
+var bg = new Background(0,0,400,600,'./images/bg.png');
+//地面
+var ground = new Background(0,520,400,200,'./images/ground.png');
+//上管道
+var upPipe = new Up_pipe(0,0,100,200,'./images/pipe.png');
+//下管道  y = upheigh + 空隙高度
+var downPipe =new Down_pipe(0,350,100,200,'./images/pipe.png');
+//小鸟
+var birds_src = ['./images/0.gif','./images/1.gif','./images/2.gif'];
+var bird = new Bird(100,300,40,40,birds_src)
+
+var proArray = [];
+proArray.push(bg);
+proArray.push(ground);
+proArray.push(upPipe);
+proArray.push(downPipe);
+proArray.push(bird);
+
+
+//小鸟
+function Bird(x, y, width, height, img_paths) {
+	this.bx = x;
+	this.by = y;
+	this.bwidth = width;
+	this.bheight = height;
+
+
+	//把自己绘制到画布上的函数功能	
+	this.draw = function(){
+		var image = new Image();
+		//取余 %3
+		image.src = img_paths[birdIndex%3];
+		this.img = image;
+		birdIndex++;
+		ctx.drawImage(image, this.bx, this.by, this.bwidth, this.bheight)
+	}
+}	
+
+//背景构造函数，对象的作用就是把自己绘制到画布上
+function Background(x, y, width, height, img_path) {
+	this.bgx = x;
+	this.bgy = y;
+	this.bgwidth = width;
+	this.bgheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.draw = function(){
+		ctx.drawImage(this.img, this.bgx, this.bgy, this.bgwidth, this.bgheight)
+	}
+}	
+
+//上管道
+function Up_pipe(x, y, width, height, img_path) {
+	this.upx = x;
+	this.upy = y;
+	this.upwidth = width;
+	this.upheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.draw = function(){
+		ctx.drawImage(this.img, 0, 500, 150, 800, this.upx, this.upy, this.upwidth, this.upheight)
+	}
+}	
+
+//下管道
+function Down_pipe(x, y, width, height, img_path) {
+	this.downx = x;
+	this.downy = y;
+	this.downwidth = width;
+	this.downheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.draw = function(){
+		ctx.drawImage(this.img, 0, 500, 150, 800, this.downx, this.downy, this.downwidth, this.downheight)
+	}
+}	
+
+function judge() {
+	//判断游戏结束
+	if((bird.bx+bird.bwidth>upPipe.upx) && (bird.bx+bird.bwidth < upPipe.upx+upPipe.upwidth+bird.bwidth) && ((bird.by<upPipe.upheight) || (bird.by+bird.bheight>downPipe.downy))) {
+		// if(bird.by<upPipe.upheight) {
+		// 	clearInterval(time)
+		// }
+		// if(bird.by+bird.bheight>downPipe.downy) {
+		// 	clearInterval(time)
+		// }
+		clearInterval(time)
+	}
+
+	//修改游戏角色
+	bird.by += speed;
+	//管道从左边离开，离开屏幕后从右边回来
+
+	if(upPipe.upx + upPipe.upwidth > 0) {
+		upPipe.upx -= pipeSpeed;
+		downPipe.downx -= pipeSpeed;
+	}else {
+		//循环从右边出现
+		flag = true;
+
+		upPipe.upx = 400;
+		downPipe.downx = 400;
+		//高度变化  0-1
+		//管道高度100-300
+		//空隙 150
+		//区域 550
+		upPipe.upheight = Math.random()*200+100;
+		//计算并修改下管道位置
+		downPipe.downy = upPipe.upheight + 0 + distance;
+		downPipe.downheight = 550 - downPipe.downy;
+	}
+
+	if(flag && bird.bx>=upPipe.upx+upPipe.upwidth) {
+		score += 200;
+		flag = false;
+	}
+	//难度修改 大于0-100 100-200 200-300 300-400
+	if(score >= 400){
+
+		// speed = 8; //小鸟下落速度
+		// pipeSpeed = 50;//管道速度
+	}
+
+	ctx.fillStyle = 'rgb(255,255,255)';
+	ctx.font = '30px Accent';
+	ctx.fillText(score,200,100);
+
+
+}
+
+function drawall() {
+	//绘制所有游戏角色 注意绘制顺序
+	ctx.clearRect(0,0,400,600);
+	for(var i=0; i<proArray.length; i++){
+		proArray[i].draw();
+	}
+	judge()
+}
+
+function keyup(e) {
+	if(e.keyCode == 32) {
+		bird.by -= 50;
+	}
+}
+
+//game开始
+function init(){
+	ctx = document.getElementById('canvas').getContext('2d');
+
+	//玩家控制游戏 
+	//鼠标 空格 enter
+	document.onkeyup = keyup;
+
+	//开启定时器
+	time = setInterval(drawall , 100);
+
+}
+
+</script>
+<body onload="init()">
+	
+<canvas id="canvas" width="400" height="600"></canvas>
+
+</body>
+</html>

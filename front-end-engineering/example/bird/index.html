@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+#canvas {width: 400px; height: 600px; margin: 0 auto; background-color: green;}
+</style>
+<script>
+//游戏相关数据尽量使用全局变量
+var ctx;
+var time; //定时器关闭，游戏就结束
+var distance = 150;
+var speed = 6; //小鸟下落速度
+
+//背景
+var bg = new Background(0,0,400,600,'./images/bg.png');
+//地面
+var ground = new Background(0,520,400,200,'./images/ground.png');
+//上管道
+var upPipe = new Up_pipe(0,0,100,200,'./images/pipe.png');
+//下管道  y = upheigh + 空隙高度
+var downPipe =new Down_pipe(0,350,100,200,'./images/pipe.png');
+//小鸟
+var bird = new Bird(100,300,40,40,'./images/0.gif')
+
+
+//小鸟
+function Bird(x, y, width, height, img_path) {
+	this.bx = x;
+	this.by = y;
+	this.bwidth = width;
+	this.bheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.drawBird = function(){
+		ctx.drawImage(this.img, this.bx, this.by, this.bwidth, this.bheight)
+	}
+}	
+
+//背景构造函数，对象的作用就是把自己绘制到画布上
+function Background(x, y, width, height, img_path) {
+	this.bgx = x;
+	this.bgy = y;
+	this.bgwidth = width;
+	this.bgheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.drawBg = function(){
+		ctx.drawImage(this.img, this.bgx, this.bgy, this.bgwidth, this.bgheight)
+	}
+}	
+
+//上管道
+function Up_pipe(x, y, width, height, img_path) {
+	this.upx = x;
+	this.upy = y;
+	this.upwidth = width;
+	this.upheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.drawUp = function(){
+		ctx.drawImage(this.img, 0, 500, 150, 800, this.upx, this.upy, this.upwidth, this.upheight)
+	}
+}	
+
+//下管道
+function Down_pipe(x, y, width, height, img_path) {
+	this.downx = x;
+	this.downy = y;
+	this.downwidth = width;
+	this.downheight = height;
+
+	var image = new Image();
+	image.src = img_path;
+	this.img = image;
+	
+	//把自己绘制到画布上的函数功能	
+	this.drawDown = function(){
+		ctx.drawImage(this.img, 0, 500, 150, 800, this.downx, this.downy, this.downwidth, this.downheight)
+	}
+}	
+
+function judge() {
+	//判断游戏结束
+
+
+	//修改游戏角色
+	bird.by += speed;
+}
+
+function drawall() {
+	//绘制所有游戏角色 注意绘制顺序
+	ctx.clearRect(0,0,400,600);
+	Background.drawBg();
+	Up_pipe.drawUp();
+	Down_pipe.drawDown();
+	Bird.drawBird();
+
+	judge()
+}
+
+
+//game开始
+function init(){
+	ctx = document.getElementById('canvas').getContext('2d');
+
+	//开启定时器
+	time = setInterval(drawall , 100);
+
+}
+
+</script>
+<body onload="init()">
+	
+<canvas id="canvas" width="400" height="600"></canvas>
+
+</body>
+</html>

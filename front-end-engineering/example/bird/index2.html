@@ -5,7 +5,7 @@
 	<title>Document</title>
 </head>
 <style type="text/css">
-#canvas {width: 400px; height: 600px; margin: 0 auto; background-color: green;}
+#canvas {width: 375px; height: 667px; margin: 0 auto; background-color: green;}
 </style>
 <script>
 //游戏相关数据尽量使用全局变量
@@ -25,12 +25,13 @@ var bg = new Background(0,0,400,600,'./images/bg.png');
 //地面
 var ground = new Background(0,520,400,200,'./images/ground.png');
 //上管道
-var upPipe = new Up_pipe(0,0,100,200,'./images/pipe.png');
+var upPipe = new Up_pipe(10,0,100,258,'./images/pipe.png');
 //下管道  y = upheigh + 空隙高度
-var downPipe =new Down_pipe(0,350,100,200,'./images/pipe.png');
+var downPipe =new Down_pipe(10,408,100,258,'./images/pipe.png');
 //小鸟
 var birds_src = ['./images/0.gif','./images/1.gif','./images/2.gif'];
 var bird = new Bird(100,300,40,40,birds_src)
+
 
 var proArray = [];
 proArray.push(bg);
@@ -89,7 +90,7 @@ function Up_pipe(x, y, width, height, img_path) {
 	
 	//把自己绘制到画布上的函数功能	
 	this.draw = function(){
-		ctx.drawImage(this.img, 0, 500, 150, 800, this.upx, this.upy, this.upwidth, this.upheight)
+		ctx.drawImage(this.img, 160, 488, 150, 800, this.upx, this.upy, this.upwidth, this.upheight)
 	}
 }	
 
@@ -106,10 +107,9 @@ function Down_pipe(x, y, width, height, img_path) {
 	
 	//把自己绘制到画布上的函数功能	
 	this.draw = function(){
-		ctx.drawImage(this.img, 0, 500, 150, 800, this.downx, this.downy, this.downwidth, this.downheight)
+		ctx.drawImage(this.img, 10, 477, 150, 800, this.downx, this.downy, this.downwidth, this.downheight)
 	}
 }	
-
 function judge() {
 	//判断游戏结束
 	if((bird.bx+bird.bwidth>upPipe.upx) && (bird.bx+bird.bwidth < upPipe.upx+upPipe.upwidth+bird.bwidth) && ((bird.by<upPipe.upheight) || (bird.by+bird.bheight>downPipe.downy))) {
@@ -132,9 +132,9 @@ function judge() {
 	}else {
 		//循环从右边出现
 		flag = true;
-
-		upPipe.upx = 400;
-		downPipe.downx = 400;
+		
+		upPipe.upx = 375;
+		downPipe.downx = 375;
 		//高度变化  0-1
 		//管道高度100-300
 		//空隙 150

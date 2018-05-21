@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>v-text & v-html实例</title>
+	<title>v-model实例</title>
 	<script type="text/javascript" src="../assets/libs/vue.js"></script>
 </head>
 <body>
-
+	<h1>v-model 实例</h1>
+	<hr>
 	<div id="app">
-		<span v-text="message"></span>
-		<div v-html="msgHtml"></div>
+		输入框内容: <input type="text" v-model="test"> <br>
+		输入的内容是: {{test}}
 	</div>
 
 <script>
 let app = new Vue({
 	el: '#app',
 	data: {
-		message: 'Hello Word!',
-		msgHtml: '<h1>这是html文件 p1标签</h1>'
+		test: 'Hello Word!'
 	}
 })
 </script>

@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>v-model实例</title>
+    <meta charset="UTF-8">
+    <title>v-model 绑定数据源</title>
 	<script type="text/javascript" src="../assets/libs/vue.js"></script>
 </head>
 <body>
-	<h1>v-model 实例</h1>
-	<hr>
-	<div id="app">
-		输入框内容: <input type="text" v-model="test"> <br>
-		输入的内容是: {{test}}
-	</div>
+    <h1>v-model 绑定数据源 案例</h1>
+    <hr>
+    <div id="app">
+       <p>原始文本信息：{{message}}</p>
+       <h3>文本框</h3>
+       <p>v-model:<input type="text" v-model="message"></p>
+       <p>v-model.lazy:<input type="text" v-model.lazy="message"></p>
+       <p>v-model.number:<input type="text" v-model.number="message"></p>
+       <p>v-model.trim:<input type="text" v-model.trim="message"></p>
+       <hr>
+       <h3>文本区域</h3>
+       <textarea  cols="30" rows="10" v-model="message"></textarea>
+       <hr>
+       <h3>多选按钮绑定一个值</h3>
+       <input type="checkbox" id="isTrue" v-model="isTrue">
+       <label for='isTrue'>{{isTrue}}</label>
+       <hr>
+       <h3>多选绑定一个数组</h3>
+       <p>
+            <input type="checkbox" id="fisher1" value="fisher1" v-model="web_Names">
+            <label for="fisher1">fisher1</label><br/>
+            <input type="checkbox" id="fisher2" value="fisher2" v-model="web_Names">
+            <label for="fisher2">fisher2</label><br/>
+            <input type="checkbox" id="fisher3" value="fisher3" v-model="web_Names">
+            <label for="fisher3">fisher3</label>
+            <p>{{web_Names}}</p>
+       </p>
+       <hr>
+       <h3>单选按钮绑定</h3>
+	   <input type="radio" id="one" value="男" v-model="sex">
+	   <label for="one">男</label>
+	   <input type="radio" id="two" value="女" v-model="sex">
+	   <label for="two">女</label>
+	   <p>{{sex}}</p>
+       <hr>
+    </div>
 
-<script>
-let app = new Vue({
-	el: '#app',
-	data: {
-		test: 'Hello Word!'
-	}
-})
-</script>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:'hello Vue!',
+                isTrue:true,
+                web_Names:[],
+                sex:'男'
+            }
+        })
+    </script>
 </body>
 </html>

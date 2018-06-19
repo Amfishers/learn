@@ -41,7 +41,16 @@
 	   <label for="two">女</label>
 	   <p>{{sex}}</p>
        <hr>
+
+    <hr>
+
+    <input type="text" v-model="message" />
+
+    当用户输入'xxxx' 时显示下方button
+    <button v-show=" message == 'xxxx' ">用户输入的是 xxxx</button>
+
     </div>
+
 
     <script type="text/javascript">
         var app=new Vue({

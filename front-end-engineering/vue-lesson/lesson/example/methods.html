@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>methods 方法</title>
+	<script type="text/javascript" src="../assets/libs/vue.js"></script>
+</head>
+<body>
+    <h1>methods 案例</h1>
+    <hr>
+    <div id="app">
+        <div v-show="isShow">队列</div>
+        <div v-show="isShow">队列</div>
+        <div v-show="isShow">队列</div>
+        <div v-show="isShow">队列</div>
+        <div v-show="isShow">队列</div>
+        <div v-if="isShow">队列</div>
+        
+        <button @click="changeShow">点我显示与隐藏</button>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          isShow: false
+        }
+      },
+      methods: {
+        changeShow(e) {
+          this.isShow = !this.isShow
+        }
+      }
+    })
+    </script>
+</body>
+</html>

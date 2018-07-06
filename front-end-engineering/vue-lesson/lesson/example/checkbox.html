@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<div id="arr">
+		<input type="checkbox" id="fisher1" value="fisher1"><label for="fisher1">fisher1</label>
+		<input type="checkbox" id="fisher2" value="fisher2"><label for="fisher2">fisher2</label>
+		<input type="checkbox" id="fisher3" value="fisher3"><label for="fisher3">fisher3</label>
+	</div>
+	<div id="show">
+
+	</div>
+
+	<script>
+	window.onload = function() {
+		var inputArr = document.querySelectorAll('input');
+		var arr = [];
+		for(var i=0; i<inputArr.length; i++) {
+			inputArr[i].index = i;
+			inputArr[i].onclick=function(){
+				var _val = this.value;
+				if(this.checked) {
+					arr.push(_val);
+				}else {
+					arr.splice(arr.indexOf(_val), 1);
+				};
+				document.getElementById('show').innerHTML = arr;
+			}
+			// (function(i) {
+			// 	inputArr[i].onclick=function(){
+			// 		alert(i);
+			// 	}
+			// })(i)
+		}
+	}
+	</script>
+</body>
+</html>

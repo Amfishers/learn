@@ -31,7 +31,6 @@ module.exports = {
         ]
     },
     //监控
-    watch: true,
     plugins: [
         //插件执行顺序与元素索引有关
         new HtmlWebpackPlugin({

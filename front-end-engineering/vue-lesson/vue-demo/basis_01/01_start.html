@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+    <div id="app"></div>
+
+    <!-- 1:引包 -->
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <!-- vue.js是支持所有模块, min是压缩后的,初学引入vue.js有提示 -->
+
+    <!-- 通过Vue对象 去new Vue(options); -->
+    <script type="text/javascript">
+    // 使用步骤
+    //  1: 引包.具备Vue对象
+    //  2: 启动Vue   通过new Vue(options);
+    //  3: 配置options选项对象    
+    //  4: el:'目的地' template:'模板' data:function() {  return { 要使用的key:数据  } }
+    //  5:页面中存在该目的地, 目的地字符串描述,同jq方式一样
+
+
+
+      new Vue({
+        // el: 发生行为的目的地
+        // el:'#app',   //  在vue内部运行机制中,需要根据你传递的字符串进行判断,比如,就行是#xxx 还是.xxx,还是div 元素查找
+        
+        // el:document.getElementById('app'), // 更为优化,将元素直接找到,避免了vue来取判断
+        
+        // 也可以用类名或标签名查找
+        el:'div',
+        // template: 装载的模板
+        template:'<div><h1>大家好 {{text}} </h1></div>',
+        //动态数据的声明
+        data:function() {  // 也可以使用对象,不用太在意
+          return {
+            // template中要使用的数据
+            text:'hello vue'
+          }
+        }
+      });
+    </script>
+
+</body>
+</html>

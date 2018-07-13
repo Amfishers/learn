@@ -1,0 +1,33 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        
+     new Vue({
+        el:'#app',
+        template:`
+        <!--必须一个根节点-->
+            <div>
+              <input type="text" v-model="myValue" />
+
+              当用户输入xxxx的时候，显示下面的button
+              <button v-show="myValue== 'xxxx' ">用户输入的是xxxx</button>
+            </div>
+        `,
+        data:function () {
+          return {
+            myValue:'哈哈呵呵嘻嘻'
+          }
+        }
+      });
+
+
+
+    </script>
+</body>
+</html>

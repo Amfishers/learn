@@ -1,0 +1,67 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app"></div>
+  
+  <!-- 引包 -->
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+
+
+//  v-text 只能用在双标签中
+//  v-text 其实就是给元素的innerText赋值
+//  v-html 其实就是给元素的innerHTML赋值
+//  v-if 如果值为false,会留下一个<!---->作为标记，万一未来v-if的值是true了，就在这里插入元素
+//  如果有if和else就不需要单独留坑了
+//  如果全用上  v-if 相邻v-else-if 相邻 v-else 否则 v-else-if可以不用
+//  v-if和v-else-if都有等于对应的值，而v-else直接写
+//  v-if家族都是对元素进行插入和移除的操作
+//  v-show是显示与否的问题
+
+
+      // 总结:
+      // v-text: innerText
+      // v-html: innerHTML
+      // v-if: 是否插入元素
+      // v-show: 是否隐藏元素
+      // 启动vue
+      new Vue({
+        el:'#app',
+        template:`
+        <!--必须一个根节点-->
+            <div>
+                <span v-text="myText"></span>
+                <hr/>
+                <span v-html="myHtml"></span>
+
+                <!--以下的3个指令的使用,必须是相邻的DOM元素-->
+                <button v-if=" num == 1 ">测试v-if</button>
+                <button v-else-if=" num == 2 ">测试v-else-if</button>
+                <button v-else >测试v-else</button>
+
+
+                <hr/>
+                <button v-show="isShow">我是v-show</button>
+
+            </div>
+        `,
+        data:function () {
+          return {
+            myText:'<h1>我是v-text的值!</h1>',
+            myHtml:'<h1>我真的是HTML</h1>',
+            isExit:true,
+            num:3,
+            isShow:false
+          }
+        }
+      });
+
+
+  </script>
+
+</body>
+</html>

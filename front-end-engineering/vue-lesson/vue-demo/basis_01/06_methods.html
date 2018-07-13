@@ -1,0 +1,48 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    
+  new Vue({
+    el:'#app',
+    template:`
+      <div>
+          <h1 v-show="isShow">1</h1>
+          <h1 v-show="isShow">2</h1>
+          <h1 v-show="isShow">3</h1>
+          <h1 v-if="isShow">4</h1>
+
+
+          <button @click="changeIsShow">点我行为更酷</button>
+      </div>
+
+    `,
+    data:function () {
+      return {
+          isShow:true
+      }
+    },
+    // 在根属性中声明methods属性
+    methods:{
+      // key是函数名,value是函数体
+      changeIsShow:function(e) {
+        // this 就是data函数return出去的对象
+        // vue帮我们处理的this指向,不是事件对象了
+        console.log(e);
+
+        this.isShow = !this.isShow;
+
+      }
+    }
+  });
+
+
+
+  </script>
+</body>
+</html>

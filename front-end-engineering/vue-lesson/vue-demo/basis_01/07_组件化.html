@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  
+  <script type="text/javascript">
+
+      // 1:生出子,   声明子   ,  使用子
+      // 头组件
+      var MyHeader = {
+        template:'<div>我是头部</div>'
+      }
+
+      // 函数调用的方式创建组件
+      var MyBody = Vue.extend({
+        template:'<div>我是函数调用方式的中部</div>'
+      });
+      // 语法糖
+      // var MyBody = {
+      //   template:'<div>我是中部</div>'
+      // }
+
+      var Myfooter = {
+        template:`<div>
+          我是底部<button @click="showNum(123)">点我</button>
+        </div>`,
+        methods:{
+          showNum:function(num) {
+            alert(num);
+          }
+        }
+      }
+
+      // 声明入口组件
+      var App = {
+        components:{
+          'my-header':MyHeader,
+          'my-body':MyBody,
+          'my-footer':Myfooter
+
+        },
+        template:`
+          <div>
+              <my-header/>
+              <my-body/>
+              <my-footer/>
+          </div>
+        `
+      };
+      // 只有在new Vue中,可以这样使用单标签
+      new Vue({
+        el:'#app',
+        components:{ // 声明要用的组件们
+          // key是组件名,value是组件对象
+          app:App
+        },
+        template:'<app/>' // 入口组件
+      });
+
+      
+
+
+
+
+  </script>
+
+
+</body>
+</html>

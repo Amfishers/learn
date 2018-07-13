@@ -1,0 +1,63 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .a{
+      background-color: red;
+    }
+    .b {
+      background-color: green;
+    }
+
+  </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        // 启动
+        new Vue({
+          el:'#app',
+          template:`
+          <div>
+             补充知识点:
+                1:v-for的使用中,除了item属性,也还有一些辅助属性
+                  stus:数组:  (item,index) in stus  奇偶数不同样式 :class="index%2==0?'red':'green'"
+
+                  stus:对象 (value,key,index) in stus
+
+
+              <ul>
+                <li v-for="item in stus" :class="item.myClass">
+                    {{ item.name }}
+                </li>
+              </ul>
+
+              <hr/>
+              <ul>
+                <li v-for="(val,key,index) in stus2">
+                    val:{{val}}
+                    key:{{key}}
+                    index:{{index}}
+
+                </li>
+              </ul>
+
+          </div>`,
+          //数据
+          data:function () {
+            return {
+              stus:[{name:'张三',myClass:'a'},{name:'李四',myClass:'b'},{name:'王五',myClass:'a'}],
+
+              stus2:{ 'A':'张三','B':'李四','C':'王五'   }
+            }
+          }
+
+
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+     var Son = {
+        template:`
+          <div>
+          
+            接收到父组件的数据是: {{ title }}
+            <h1 v-if="xxx">1</h1>
+            <h1 v-show="xxx">2</h1>
+            <ul>
+              <li v-for="stu in ['张三','李四']">
+                  {{stu}}
+              </li>
+            </ul>
+            <button @click="changeXxx">改变显示</button>
+
+          <hr/>
+
+          单向数据流(vue->html) :
+          <input type="text" :value="text"/><br/>
+          双向数据流(vue->html->vue):
+          <input type="text" v-model="text"/><br/>
+          <h1>主要看这里:↓↓↓↓↓↓↓</h1>
+          {{ text }}
+          </div>
+        `,
+        data:function() {
+          return {
+            xxx:true,
+            text:'hello'
+          }
+        },
+        methods:{
+          changeXxx:function () {
+            this.xxx = !this.xxx;
+          }
+        },
+        // 声明接收参数
+        props:['title'],
+     }
+
+// 其实 父向子传递, 就是v-bind给元素的属性赋值
+      var App = {
+         components:{
+          son:Son
+         },
+          template:`<div>
+          <son :title="xxx"></son>   
+          <!-- 传递常量<son title="xxx"></son>--> 
+          </div>`,
+          data:function () {
+            return  { xxx:'我是xxx数据'   }
+          }
+      };
+
+
+
+      new Vue({
+        // data就不在这个组件对象中写了(启动组件)
+        el:'#app',
+        // 声明子组件
+        components:{
+          app:App
+        },
+        template:'<app/>'
+      });
+
+
+    </script>
+
+</body>
+</html>

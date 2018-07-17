@@ -1,0 +1,55 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+
+    <script type="text/javascript">
+
+        
+        var App = {
+          template:`
+              <div>
+                 <input type="text" v-model="n1" />
+                 +
+                 <input type="text" v-model="n2" />
+                 * 
+                 <input type="text" v-model="rate" />
+                 = {{ result }}
+              </div>
+          `,
+          data:function() {
+            return { n1:0,n2:0,rate:0 }
+          },
+          computed:{
+            // 包含原值不变，缓存不调函数的优化机制
+            result:function () {
+              // 监视对象,写在了函数内部,  凡是函数内部有this.相关属性,改变都会触发当前函数
+              
+              // this.n1 this.n2 this.rate
+              console.log('监视到了');
+              return ((this.n1-0) + (this.n2-0)) * this.rate; 
+
+            }
+          }
+
+        }
+
+
+        new Vue({
+          el:'#app',
+          components:{
+            app:App
+          },
+          template:'<app/>'
+        })
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Document</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+    
+        <script type="text/javascript">
+            Vue.component('my-btn',{
+                template: '<div><button>我是全局按钮</button></div>'
+            })
+            var App = {
+                template: `<div>123</div>`
+            }
+            new Vue({
+                el: '#app',
+                components: {
+                    app: App   
+                },
+                template: `<div>
+                    <my-btn/>
+                    <app/>
+                </div>`
+            })
+        </script>
+
+    </body>
+</html>

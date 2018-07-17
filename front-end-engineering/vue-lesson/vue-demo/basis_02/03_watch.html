@@ -1,0 +1,66 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        
+        var App = {
+          template:`
+              <div>
+                 <input type="text" v-model="myText" />
+                {{myText}}
+
+                <button @click="stus[0].name='rose';">改变stus[0].name属性</button>
+
+              </div>
+          `,
+          data:function() {
+            return { 
+              myText:'111' , 
+              stus:[{name:'jack'}]  
+            }
+          },
+          watch:{
+            // 监视复杂类型,无法监视的原因是因为监视的是对象的地址..地址没改,改的是同地址属性的值
+            // stus:function() {
+            //   console.log('监视成功,不可能!');
+            // },
+
+            // 深度监视 : object||array
+            stus:{
+              deep:true,//深度
+              handler:function (newV,oldV) {
+                console.log('监视复杂数据类型成功!');
+              }
+            },
+
+            // watch对象中key是属于data属性的属性名,value是监视后的行为
+            myText:function(newV,oldV) {
+                console.log(newV,oldV);
+                if(newV === 'iloveyou') {
+                  alert('我不爱你!');
+                }
+            }
+          }
+        }
+
+
+        new Vue({
+          el:'#app',
+          components:{
+            app:App
+          },
+          template:'<app/>'
+        })
+
+
+
+    </script>
+</body>
+</html>

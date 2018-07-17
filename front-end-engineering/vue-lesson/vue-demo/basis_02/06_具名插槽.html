@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+
+    <script type="text/javascript">
+
+        // slot是留坑，  外部填入html内容
+        var MySlot = {
+          template:`<li>
+              以下预留第一个坑
+              <slot name="one"></slot>
+              <hr/>
+              以下预留第2个坑
+              <slot name="two"></slot>
+          </li>`
+        }
+        Vue.component('my-slot',MySlot);
+
+        // 入口组件:  实现一个九宫格
+        var App = {
+            template:`
+              <div>
+                <my-slot>
+                  <h1 slot="two">我是1,对应第一个坑</h1>
+                  <h1 slot="one">我是2,对应第2个坑</h1>
+                </my-slot>
+              </div>
+            `
+        }
+
+        new Vue({
+          el:'#app',
+          components:{
+            app:App
+          },
+          template:'<app/>'
+        })
+
+
+
+    </script>
+</body>
+</html>

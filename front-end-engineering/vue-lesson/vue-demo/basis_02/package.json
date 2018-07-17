@@ -1,0 +1,16 @@
+{
+  "name": "basis_02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "07_main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "vue": "^2.5.16"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

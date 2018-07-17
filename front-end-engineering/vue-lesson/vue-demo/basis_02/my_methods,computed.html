@@ -1,0 +1,45 @@
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Document</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+    
+        <script type="text/javascript">
+
+            new Vue({
+                el: '#app',
+                data: {
+                    myText: '123'
+                },
+                methods: {
+                    isShow: function() {
+                        console.log(this)
+
+                        console.log('methods')
+
+                        return this.myText = '232323'
+                    }
+                },
+                computed: {
+                    textShow: function() {
+                        console.log('computed')
+                        return this.myText = '123123'
+                    }
+                },
+                template: `
+                    <div>
+                        {{isShow()}}
+                        -------------------
+                        {{textShow}}
+
+                    </div>
+                `
+
+            })
+        </script>
+
+    </body>
+</html>

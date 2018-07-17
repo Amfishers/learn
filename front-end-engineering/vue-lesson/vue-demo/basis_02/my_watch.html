@@ -1,0 +1,48 @@
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Document</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+    
+        <script type="text/javascript">
+            var App = {
+                template: `
+                    <div>
+                        <input type="text" v-model="myText" />
+                        {{myText}}
+                        
+
+                    </div>
+                `,
+                data: function() {
+                    return {
+                        myText: '123'
+                    }
+                },
+                watch: {
+
+                    myText: function(oldVal) {
+                        if(oldVal === '456') {
+                            alert('我爱你')
+                        }
+                    }
+                }
+            }
+
+
+            new Vue({
+                el: '#app',
+                components: {
+                    app: App   
+                },
+                template: `<div>
+                    <app/>
+                </div>`
+            })
+        </script>
+
+    </body>
+</html>

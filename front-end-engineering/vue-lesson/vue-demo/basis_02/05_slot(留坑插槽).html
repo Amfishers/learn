@@ -1,0 +1,78 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    li {
+      list-style: none;
+      float: left;
+      width:33%;
+      background-color: yellowgreen;
+      border: 1px solid black;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+
+    <script type="text/javascript">
+
+        // slot是留坑，  外部填入html内容
+        var MyLi = {
+          template:`<li>
+            <slot></slot>
+          </li>`
+        }
+        Vue.component('my-li',MyLi);
+
+
+        // 总结: slot其实就是父组件传递的DOM结构
+        // vue提供的内置组件 <slot></slot>
+        //   <my-li>
+          // <button>111</button>
+        // </my-li>
+
+
+        // 入口组件:  实现一个九宫格
+        var App = {
+            template:`
+              <div>
+                <ul>
+                  <my-li>
+                    <button>111</button>
+                  </my-li>
+                  <my-li>
+                      <h1>222</h1>
+                  </my-li>
+                  <my-li>3</my-li>
+                  <my-li>4</my-li>
+                  <my-li>5</my-li>
+                  <my-li>6</my-li>
+                  <my-li>7</my-li>
+                  <my-li>
+                    <h1>888</h1>
+                  </my-li>
+                  <my-li>
+                    <button>9999</button>
+                  </my-li>
+                </ul>
+              </div>
+            `
+        }
+
+        new Vue({
+          el:'#app',
+          components:{
+            app:App
+          },
+          template:'<app/>'
+        })
+
+
+
+    </script>
+</body>
+</html>

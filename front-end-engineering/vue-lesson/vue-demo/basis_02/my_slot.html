@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+
+    <script type="text/javascript">
+
+        var Test = {
+            template: `<div class="aaa">
+                <slot></slot>
+            </div>`
+        }
+
+        var App = {
+            components: {
+                test: Test
+            },
+            template: `<test>
+                哈哈哈
+            </test>`
+
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                app: App
+            },
+            template: `<div>
+                <app/>
+            </div>`
+        })
+
+
+    </script>
+</body>
+
+</html>

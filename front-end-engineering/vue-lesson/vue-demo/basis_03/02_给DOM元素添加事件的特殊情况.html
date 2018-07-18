@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+
+  <script type="text/javascript">
+
+
+      var App = {
+        template:`
+          <div>
+              <input type="text" v-if="isShow" ref="input"/>
+          </div>
+        `,
+        data:function () {
+          return  { isShow:false }
+        },
+        mounted:function () {  
+          // 装载数据之后
+          // 显示元素,并给与获取焦点
+          this.isShow = true;  //  会触发input元素的插入
+          
+          // 思考
+          this.isShow = false;
+          this.isShow = true;
+          // 最终代码执行完毕以后,vue才会根据实际的值,进行DOM的操作
+
+          // 给input元素获取焦点
+          // this.$refs.input.focus();
+          
+          // 我们希望在vue真正渲染DOM到页面以后,才做的事
+          this.$nextTick(function () {
+            this.$refs.input.focus();
+          });
+        }
+      }
+
+
+      var vm = new Vue({
+        el:'#app',
+        components:{ app:App },
+        template:`<app/>`
+      });
+
+
+  </script>
+
+</body>
+</html>

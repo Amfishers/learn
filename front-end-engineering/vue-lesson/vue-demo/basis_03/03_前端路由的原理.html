@@ -1,0 +1,31 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <a href="#/login">点我登录</a>
+  <a href="#/register">点我注册</a>
+
+  <div id="content"></div>
+
+  <script type="text/javascript">
+      // hashchange事件..   url上的部分锚点数据(#xxx)改变.可以获取到这个事件  
+      var div = document.getElementById('content');
+      window.addEventListener('hashchange',function () {
+           // 根据不同的锚点值做出不同的显示
+           switch(location.hash) {
+              case '#/login': 
+                div.innerHTML = '<h1>登录页面</h1>';
+                break;
+              case '#/register':
+                div.innerHTML = '<h1>注册页面</h1>'
+                break;
+           }
+      });
+
+
+  </script>
+
+</body>
+</html>

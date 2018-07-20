@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <!-- 1:引入vue-router(核心插件)对象 -->
+    <script type="text/javascript" src="./vue-router.js"></script>
+
+    <script>
+        var Success = {
+            template: '<div>登陆成功</div>'
+        }
+        var Quit = {
+            template: '<div>注册成功，退出</div>'
+        }
+        var Login = {
+            template: `<div> 
+                登陆页面 
+                <router-link :to="{ name:'login.success' }">确定</router-link>
+                <router-view></router-view>
+            </div>`,
+            mounted() {
+                // 说明：
+                //$router 路由操作对象，只写对象。通过$router提供的一些函数，做路由的跳转
+                //$route 对象是通过 VueRouter给挂载的， 这个对象会有每一次路由跳转给我们一些信息对象，更像node中的request，可以认为是只读
+                console.log(this.$route.query)  //不是$router
+            }
+        }
+        var Register = {
+            template: `<div> 
+                注册页面 
+                <router-link :to="{ name:'register.quit' }">退出</router-link>
+                <router-view></router-view>
+            </div>`,
+            mounted() {
+                console.log(this.$route.params)   //不是$router
+            },
+        }
+        Vue.use(VueRouter)
+        var router = new VueRouter({
+            routes: [
+                {
+                    name: 'login',
+                    path: '/login',
+                    component: Login,
+                    children: [
+                        {
+                            name: 'login.success',
+                            path: '/success',
+                            component: Success
+                        }
+                    ]
+                },
+                {
+                    name: 'register',
+                    path: '/register/:name',
+                    component: Register,
+                    children: [
+                        {
+                            name: 'register.quit',
+                            path: 'quit',
+                            component: Quit
+                        }
+                    ]
+                }
+            ]
+        })
+        var App = {
+            template: `<div>
+            <router-link :to="{ name: 'login', query: {id: 1}}"> 去登陆 </router-link>
+            <router-link :to="{ name: 'register', params: {name: 'fisher'}}"> 去注册 </router-link>
+
+            <router-view></router-view>
+        </div>`,
+
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                app: App
+            },
+            template: '<app/>',
+            router: router
+        })
+
+    </script>
+
+</body>
+
+</html>

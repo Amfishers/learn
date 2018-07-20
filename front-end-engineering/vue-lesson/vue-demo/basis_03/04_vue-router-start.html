@@ -1,0 +1,56 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <!-- 1:引入vue-router(核心插件)对象 -->
+  <script type="text/javascript" src="./vue-router.js"></script>
+  
+  <script type="text/javascript">
+     var Login = {  template:`<div>
+       我是登录页面
+     </div>`}
+
+
+      // 2: 安装插件 =>  ?
+      Vue.use(VueRouter);
+      // 3: 创建一个路由对象
+      var router = new VueRouter({
+        // 4: 配置路由对象
+        routes:[ { path:'/login',component:Login } ]
+      });
+      
+ // 6: 指定路由改变局部的位置
+      var App = {
+        template:`
+            <div>
+                <router-view></router-view>
+            </div>
+        `
+      }
+
+      // 5: 将配置好的路由对象关联到vue实例中
+      new Vue({
+        el:'#app',
+        router:router, // 不加这一步,会导致运行的时候说undefined对象中取不到matched
+        components:{
+          app:App
+        },
+        template:'<app/>'
+      });
+     
+      
+      
+
+
+
+
+  </script>
+
+
+</body>
+</html>

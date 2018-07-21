@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+    <!-- 1:引入vue-router(核心插件)对象 -->
+    <script type="text/javascript" src="./vue-router.js"></script>
+    <script type="text/javascript">
+    var Woman = {
+        template: `<div>
+      欢迎女士登录...
+    </div>`
+    }
+var Man = {
+        template: `<div>
+      欢迎男登录...
+    </div>`
+    }
+    // 1: router-view中包含router-view
+    // 2: 路由规则中存在子路由
+    var Login = {
+        template: `<div>
+      我是login显示的内容,下面是子路由显示的内容
+       <router-view></router-view>
+     </div>`,
+        created: function() {
+            console.log(this.$route.query);
+        },
+
+    };
+    var Register = {
+        template: `<div>
+      我是register显示的内容,下面是子路由显示的内容
+       <router-view></router-view>
+     div>`,
+        created: function() {
+            console.log(this.$route.params);
+        },
+    };
+    // 3: 创建一个路由对象
+    var router = new VueRouter({
+        // 4: 配置路由对象
+        routes: [
+            // 路由对象有了名称就等于有了变量名,router-link只需说明这个变量名就可以
+            {
+                // 保证 /login显示 login组件
+                name: 'login',
+                path: '/login',
+                component: Login,
+                // 保证 /login/woman 显示abc
+                children: [{
+                        name: 'login.woman',
+                        path: '/woman',
+                        component: Woman
+                    },
+                    {
+                        name: 'login.man',
+                        path: 'man',
+                        component: Man
+                    }
+                ]
+
+            },
+            { name: 'register', path: '/register/:name', component: Register }
+        ]
+    });
+
+    // 6: 指定路由改变局部的位置
+    var App = {
+        template: `
+            <div>
+                 <router-link :to="{name:'login.woman'}">去女性登录点</router-link>
+                 <router-link :to="{name:'login.man'}">去男性登录点</router-link>
+                <router-view></router-view>
+            </div>
+        `
+    }
+
+    // 5: 将配置好的路由对象关联到vue实例中
+    var vm = new Vue({
+        el: '#app',
+        router: router, // 不加这一步,会导致运行的时候说undefined对象中取不到matched
+        components: {
+            app: App
+        },
+        template: '<app/>'
+    });
+    </script>
+</body>
+
+</html>

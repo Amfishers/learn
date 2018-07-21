@@ -1,0 +1,96 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+  <!-- 1:引入vue-router(核心插件)对象 -->
+  <script type="text/javascript" src="./vue-router.js"></script>
+
+  <script type="text/javascript">
+    var isLogin = false;
+    var Login = {
+      template: `<div>
+       我是登录页面
+     </div>`,
+      created: function () {
+        isLogin = true;
+      }
+    };
+    var Music = {
+      template: `<div>
+       我的音乐页面
+     </div>`,
+    };
+    // 3: 创建一个路由对象
+    var router = new VueRouter();
+    // 可以多次的追加路由规则,动态的获取路由规则
+    router.addRoutes([
+
+      // 默认首页路由
+      { path: '/', redirect: { name: 'login' } },
+
+      { name: 'login', path: '/login', component: Login },
+      // meta:{isChecked:true} 给未来路由的权限控制.. 全局路由守卫 来做参照条件
+      { name: 'music', path: '/music', component: Music, meta: { isChecked: true } }
+    ]);//  更为灵活,可以方便调用后追加路由规则
+    console.log(router)
+    router.beforeEach(function (to, from, next) {
+      // login等..放行
+      if (!to.meta.isChecked) {
+        next(); //  不调用next 就会卡住
+      } else {
+        // 音乐访问,需要判断是否登录
+        if (isLogin) {
+          next();  // 放行   
+          //next()  有三种行为
+          //next() 这是放行
+          //next({ name: 'Login' })  //这是重定向
+          //next(false);  // 取消用户导航行为
+        } else {
+          alert('请先登录..');
+          // 重定向 /login
+          //  可以直接写 next('/login')
+          next({ name: 'login' });
+        }
+      }
+
+    });
+
+
+
+
+    // 6: 指定路由改变局部的位置
+    var App = {
+      template: `
+            <div>
+                <router-link :to="{name:'login'}">登录</router-link>
+                <router-link :to="{name:'music'}">去听歌</router-link>
+                <router-view></router-view>
+            </div>
+        `
+    }
+
+    // 5: 将配置好的路由对象关联到vue实例中
+    var vm = new Vue({
+      el: '#app',
+      router: router,
+      components: {
+        app: App
+      },
+      template: '<app/>'
+    });
+
+
+
+  </script>
+
+
+</body>
+
+</html>

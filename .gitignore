@@ -3,3 +3,4 @@
 /front-end-engineering/wxgame/*
 node_modules
 .idea
+.DS_Store

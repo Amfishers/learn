@@ -1,0 +1,54 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+  <script type="text/javascript" src="./vue.js"></script>
+  <script type="text/javascript" src="./axios.js"></script>
+  
+  <script type="text/javascript">
+      
+      var App = {
+        template:`
+          <div>
+            <button @click="sendAjax">发请求</button>
+          </div>
+
+        `,
+        methods:{
+          sendAjax:function() {
+            // 让组件具备axios对象的引用  
+            // axios.get||post|put|delete(url,options)
+            axios.get('http://127.0.0.1:8888/')
+            .then(function(res) {
+              console.log(res);
+            })
+            .catch(function(err) {
+              console.log(err);
+            })
+          }
+        }
+      }
+
+      // 组件内的每一个this对象，都是Vue的孩子。。
+      // Vue祖宗的原型数据，就会共享给所有的孩子
+      Vue.prototype.$axios = axios;
+
+      new Vue({
+        el:'#app',
+        components:{
+          app:App
+        },
+        template:'<app/>'
+      });
+
+
+  </script>
+
+</body>
+
+</html>

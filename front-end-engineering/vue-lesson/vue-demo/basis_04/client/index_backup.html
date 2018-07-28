@@ -1,0 +1,117 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  
+  <script type="text/javascript" src="./vue.js"></script>
+  <script type="text/javascript" src="./vue-router.js"></script>
+  <script type="text/javascript" src="./axios.js"></script>
+
+  <script type="text/javascript">
+    var App = {
+      template:`
+        <div>
+             <input type="file" name=""  @change="fileChange" id="file">
+            当前上传进度为:
+                {{rate}}%....
+            <button @click="send">发请求</button>
+            <button @click="cancel">取消请求</button>
+            <button @click="resume">续传</button>
+      
+        </div>
+
+      `,
+      data(){
+            return {
+                file:{},//上传文件
+                rate:'',//上传显示
+                source:{}, //保存令牌机
+                isFirst:true,
+                loaded:0,
+            }
+        },
+        methods:{
+            resume() {
+               let CancelToken = this.$axios.CancelToken; //生产令牌的工厂
+                this.source = CancelToken.source();
+               //上传文件前的准备
+                let fd = new FormData();
+                fd.append('file',this.file.slice(this.loaded,this.file.size));
+                this.$axios.post('http://localhost:8888/upload?filename='+this.file.name,fd,{
+                  cancelToken: this.source.token,
+                   onUploadProgress: progressEvent => {
+                    console.log(progressEvent.loaded);
+                      this.loaded = progressEvent.loaded;
+                         this.rate = Math.trunc(progressEvent.loaded / progressEvent.total * 100)
+                      },
+                })
+                .then(res=>{
+                  console.log('xxx');
+                })
+            },
+            cancel(){
+                        
+                //取消的时候通过令牌取消
+                //用令牌取消
+                this.source.cancel();
+            },
+            send(){
+              console.log(this.$axios);
+                //发起请求的时候，给一个令牌
+                let CancelToken = this.$axios.CancelToken; //生产令牌的工厂
+                this.source = CancelToken.source(); //生产令牌机
+
+                //上传文件前的准备
+                let fd = new FormData();
+                fd.append('file',this.file);
+
+                //将装载数据的篮子通过ajax发送到服务器
+                this.$axios.post('http://localhost:8888/upload',fd,{
+                    //放入令牌
+                     cancelToken: this.source.token,
+                     onUploadProgress: progressEvent => {
+                      console.log(progressEvent.loaded)
+                      this.loaded = progressEvent.loaded;
+                      
+                      if(this.isFirst) {
+                        this.isFirst = false;
+                        this.cancel();
+                      }
+
+
+
+                         this.rate = Math.trunc(progressEvent.loaded / progressEvent.total * 100)
+                      },
+                })
+                .then(res=>{
+                    console.log(res);
+                })
+                .catch( err=>{
+                    console.log(err);
+                })
+            },
+            fileChange(e){
+                this.file = e.target.files[0];
+                
+            }
+        }
+    }
+
+    Vue.prototype.$axios = axios;
+      // 5: 将配置好的路由对象关联到vue实例中
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            app: App
+        },
+        template: '<app/>'
+    });
+
+
+  </script>
+</body>
+</html>

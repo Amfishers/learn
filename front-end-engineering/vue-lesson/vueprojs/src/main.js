@@ -8,6 +8,8 @@ import Axios from 'axios'
 // 配置MintUI
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+// 引入自己的css文件
+import './assets/css/global.css'
 
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = 'https://www.sinya.com/api/'

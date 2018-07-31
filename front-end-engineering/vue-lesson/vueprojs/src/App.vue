@@ -2,22 +2,23 @@
   <div>
     <mt-header fixed title="信息管理系统"></mt-header>
 
+    <router-view/>
     <mt-tabbar v-model="selected">
-      <mt-tab-item id="外卖">
+      <mt-tab-item id="home">
         <img slot="icon" src="">
-        外卖
+        home
       </mt-tab-item>
-      <mt-tab-item id="订单">
+      <mt-tab-item id="member">
         <img slot="icon" src="">
-        订单
+        member
       </mt-tab-item>
-      <mt-tab-item id="发现">
+      <mt-tab-item id="shopcart">
         <img slot="icon" src="">
-        发现
+        shopcart
       </mt-tab-item>
-      <mt-tab-item id="我的">
+      <mt-tab-item id="search">
         <img slot="icon" src="">
-        我的
+        search
       </mt-tab-item>
     </mt-tabbar>
   </div>
@@ -33,7 +34,9 @@ export default {
   },
   watch: {
     selected (newV, oldV) {
-      console.log(newV)
+      this.$router.push({
+        name: newV
+      })
     }
   }
 }

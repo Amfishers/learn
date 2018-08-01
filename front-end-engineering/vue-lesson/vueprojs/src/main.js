@@ -12,7 +12,7 @@ import 'mint-ui/lib/style.css'
 import './assets/css/global.css'
 
 Vue.prototype.$axios = Axios
-Axios.defaults.baseURL = 'https://www.sinya.com/api/'
+Axios.defaults.baseURL = 'https://www.sinya.online/api/'
 
 Vue.use(MintUI)
 

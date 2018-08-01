@@ -5,6 +5,18 @@
                 <img :src="item.img" />
             </mt-swipe-item>
         </mt-swipe>
+        <div class="opt-list">
+            <my-ul>
+                <my-li v-for="(grid, index) in grids" :key="index">
+                    <a>
+                        <div class="container">
+                            <img :src="grid.src" />
+                            <span>{{grid.title}}</span>
+                        </div>
+                    </a>
+                </my-li>
+            </my-ul>
+        </div>
     </div>
 </template>
 
@@ -12,7 +24,16 @@
 export default {
     data () {
         return {
-            imgs: []  //轮播图数据
+            imgs: [],  //轮播图数据
+            grids: [
+                { src:require('../../assets/images/news.png'), title: '新闻资讯' },
+                { src:require('../../assets/images/picShare.png'), title: '图文分享' },
+                { src:require('../../assets/images/goodsShow.png'), title: '商品展示'},
+                { src:require('../../assets/images/feedback.png'), title: '留言反馈' },
+                { src:require('../../assets/images/search.png'), title: '搜索资讯' },
+                { src:require('../../assets/images/callme.png'), title: '联系我们' }
+            ]
+
         }
     },
     created () {
@@ -47,5 +68,25 @@ export default {
     text-align: center;
     color: #666;
     margin-bottom: 5px;
+}
+.opt-list ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.opt-list li {
+    width: 33.333%;
+}
+.opt-list .container {
+    width: 50px;
+    margin: 10px auto;
+}
+.opt-list .container img {
+    display: block;
+    width: 100%;
+}
+.opt-list .container span {
+    display: block;
+    line-height: 32px;
 }
 </style>

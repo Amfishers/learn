@@ -10,6 +10,11 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      //首先进行重定向的操作
+      path: '/',
+      redirect: { name: 'home' }
+    },
+    {
       path: '/home',
       name: 'home',
       component: Home

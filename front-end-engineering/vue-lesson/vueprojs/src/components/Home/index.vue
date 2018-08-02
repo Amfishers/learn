@@ -8,12 +8,12 @@
         <div class="opt-list">
             <my-ul>
                 <my-li v-for="(grid, index) in grids" :key="index">
-                    <a>
+                    <router-link :to="grid.router">
                         <div class="container">
                             <img :src="grid.src" />
                             <span>{{grid.title}}</span>
                         </div>
-                    </a>
+                    </router-link>
                 </my-li>
             </my-ul>
         </div>
@@ -28,27 +28,45 @@ export default {
       grids: [
         {
           src: require("../../assets/images/news.png"),
-          title: "新闻资讯"
+          title: "新闻资讯",
+          router: {
+              name: 'news.list'
+          }
         },
         {
           src: require("../../assets/images/picShare.png"),
-          title: "图文分享"
+          title: "图文分享",
+          router: {
+              name: 'news.list'
+          }
         },
         {
           src: require("../../assets/images/goodsShow.png"),
-          title: "商品展示"
+          title: "商品展示",
+          router: {
+              name: 'news.list'
+          }
         },
         {
           src: require("../../assets/images/feedback.png"),
-          title: "留言反馈"
+          title: "留言反馈",
+          router: {
+              name: 'news.list'
+          }
         },
         {
           src: require("../../assets/images/search.png"),
-          title: "搜索资讯"
+          title: "搜索资讯",
+          router: {
+              name: 'news.list'
+          }
         },
         {
           src: require("../../assets/images/callme.png"),
-          title: "联系我们"
+          title: "联系我们",
+          router: {
+              name: 'news.list'
+          }
         }
       ]
     };

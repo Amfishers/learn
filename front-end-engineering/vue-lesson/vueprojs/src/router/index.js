@@ -4,6 +4,7 @@ import Home from '@/components/Home/index'
 import Member from '@/components/Member/index'
 import Shopcart from '@/components/Shopcart/index'
 import Search from '@/components/Search/index'
+import NewsList from '@/components/News/NewsList'
 
 Vue.use(Router)
 
@@ -12,7 +13,9 @@ export default new Router({
     {
       //首先进行重定向的操作
       path: '/',
-      redirect: { name: 'home' }
+      redirect: { 
+        name: 'home' 
+      }
     },
     {
       path: '/home',
@@ -33,6 +36,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: Search
+    },
+    {
+      path: '/news/list',
+      name: 'news.list',
+      component: NewsList
     }
   ]
 })

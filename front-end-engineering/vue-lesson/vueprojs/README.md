@@ -29,4 +29,20 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-通信组件 Axios
+####加载的组件
+Axios    通信/相当于发ajax请求
+moment   时间格式处理
+mint-ui  UI视图，饿了么团队出品
+
+####文件说明:
+全局操作  main.js
+路由操作  router/index.js
+自定义组件  components/Common
+
+#### 全局样式
+assets/css
+
+####自定义组件
+MyUl  ```name: my-ul```
+Myli  ```name: my-li```
+

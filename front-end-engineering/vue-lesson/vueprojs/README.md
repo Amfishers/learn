@@ -45,4 +45,5 @@ assets/css
 ####自定义组件
 MyUl  ```name: my-ul```
 Myli  ```name: my-li```
+NavBar ```name: nav-bar```
 

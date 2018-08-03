@@ -14,9 +14,11 @@ import './assets/css/common.css'
 // 引入自己的ul和li组件
 import MyLi from '@/components/Common/MyLi'
 import MyUl from '@/components/Common/MyUl'
+import NavBar from '@/components/Common/NavBar'
 // 注册全局组件
 Vue.component(MyUl.name, MyUl)
 Vue.component(MyLi.name, MyLi)
+Vue.component(NavBar.name, NavBar)
 // 定义moment全局日期过滤器
 import Moment from 'moment'
 // {{ 'xxx' | converTime('yyyy-mm-dd') }}

@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <nav-bar title="新闻列表" />
     <ul>
       <li v-for="list in NewsList" :key="list.id">
         <router-link :to="'/'+list.id">

@@ -3,7 +3,7 @@
     <nav-bar title="新闻列表" />
     <ul>
       <li v-for="list in NewsList" :key="list.id">
-        <router-link :to="'/'+list.id">
+        <router-link :to="{name: 'news.detail', query: {id: list.id}}">
           <div class="wrapper">
             <div class="img">
               <img :src="list.img_url" :alt="list.title">

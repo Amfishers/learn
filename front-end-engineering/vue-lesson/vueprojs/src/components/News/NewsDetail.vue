@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="new-detail">
     <nav-bar :title="newsDetail.title" />
     <div class="news-title">
       <p>{{newsDetail.title}}</p>
@@ -33,21 +33,27 @@ export default {
   },
 }
 </script>
-<style scoped>
-.news-title p {
+<style>
+.new-detail {
+  margin-bottom: 55px;
+}
+.new-detail .news-title {
+  margin-top: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.new-detail .news-title p {
   color: #0a87f8;
   font-size: 20px;
   font-weight: bold;
 }
-.news-title span {
-  margin-right: 30px;
-}
-.news-title {
-  margin-top: 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+.new-detail .news-title span {
+  margin-right: 10px;
 }
 /*主体文章的左右距离*/
-.news-content {
-  padding: 10 5;
+.new-detail .news-content {
+  padding: 10px 5px;
+}
+.new-detail .news-content img {
+  width: 100%;
 }
 </style>

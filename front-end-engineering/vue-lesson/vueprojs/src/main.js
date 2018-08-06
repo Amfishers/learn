@@ -11,6 +11,8 @@ import 'mint-ui/lib/style.css'
 // 引入自己的css文件
 import './assets/css/global.css'
 import './assets/css/common.css'
+// 引入iconfont
+import './assets/font/iconfont.css'
 // 引入自己的ul和li组件
 import MyLi from '@/components/Common/MyLi'
 import MyUl from '@/components/Common/MyUl'
@@ -28,7 +30,7 @@ Vue.filter('converTime', function(data, formatStr) {
 
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = 'https://www.sinya.online/api/'
-
+// 安装插件，注册全局组件及挂载属性
 Vue.use(MintUI)
 
 Vue.config.productionTip = false

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <nav-bar title="newsDetail.title" />
+    <nav-bar :title="newsDetail.title" />
     <div class="news-title">
       <p>{{newsDetail.title}}</p>
       <div>
@@ -24,6 +24,7 @@ export default {
     let id = this.$route.query.id;
     this.$axios.get('getnew/' + id)
     .then(res => {
+      console.log(res)
       this.newsDetail = res.data.message[0];
     })
     .catch(err => {

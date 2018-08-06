@@ -39,16 +39,19 @@ export default new Router({
       name: 'search',
       component: Search
     },
+    // 新闻列表
     {
       path: '/news/list',
       name: 'news.list',
       component: NewsList
     },
+    // 新闻详情
     {
       path: '/news/detail',
       name: 'news.detail',
       component: NewsDetail
     },
+    // 图文列表
     {
       path: '/photo/list/:categoryId',
       name: 'photo.list',

@@ -17,6 +17,8 @@ import './assets/font/iconfont.css'
 import MyLi from '@/components/Common/MyLi'
 import MyUl from '@/components/Common/MyUl'
 import NavBar from '@/components/Common/NavBar'
+// 图片预览插件
+import VuePreview from 'vue-preview'
 // 注册全局组件
 Vue.component(MyUl.name, MyUl)
 Vue.component(MyLi.name, MyLi)
@@ -32,6 +34,8 @@ Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = 'https://www.sinya.online/api/'
 // 安装插件，注册全局组件及挂载属性
 Vue.use(MintUI)
+// 安装图片预览插件
+Vue.use(VuePreview)
 
 Vue.config.productionTip = false
 

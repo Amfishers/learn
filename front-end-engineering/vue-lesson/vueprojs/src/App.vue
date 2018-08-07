@@ -2,7 +2,7 @@
   <div>
     <mt-header fixed title="信息管理系统"></mt-header>
 
-    <router-view/>
+    <router-view class="all-main"/>
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="home">
         <img @click="changeHash" slot="icon" src="./assets/images/index.png">
@@ -56,4 +56,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.all-main {
+  margin-bottom: 55px;
+}
+</style>

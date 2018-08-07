@@ -35,13 +35,13 @@ export default {
     };
   },
   beforeRouteUpdate(to, from, next) {
-    this.loadImagesByCategoryId(to.params.categoryId);
+    this.loadImgById(to.params.categoryId);
     next();
   },
   created() {
     // 1.获取路由参数
     let categoryId = this.$route.params.categoryId;
-    this.loadImagesByCategoryId(categoryId);
+    this.loadImgById(categoryId);
     //2.2 获取分类信息
     this.$axios
       .get("/getimgcategory")
@@ -56,10 +56,18 @@ export default {
     // 3.获取数据做渲染
   },
   methods: {
-    loadImagesByCategoryId(categoryId) {
+    loadImagesByCategoryId (categoryId) {
+      this.$router.push({
+        name: 'photo.list',
+        params: {   // 这里是一个对象，而不是单纯的传值
+          categoryId    // 此处为es6简写，原本是categoryId: categoryId  
+        }
+      })
+    },
+    loadImgById (id) {
       // 2.通过url拼接发送请求
       this.$axios
-        .get("getimages/" + categoryId)
+        .get("getimages/" + id)
         .then(res => {
           this.imgs = res.data.message
           if (this.imgs.length === 0) {
@@ -78,6 +86,8 @@ export default {
           console.log("获取图片失败", err)
         });
     }
+    
+
   }
 };
 </script>

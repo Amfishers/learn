@@ -13,6 +13,7 @@
         <div class="photo-desc">
             <p v-html="info.content"></p>
         </div>
+        <comment :cid="$route.query.id"/>
     </div>
 </template>
 <script>

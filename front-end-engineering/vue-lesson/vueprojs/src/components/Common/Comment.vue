@@ -9,10 +9,10 @@
                     </div>
                 </li>
                 <li class="txt-comment">
-                    <textarea></textarea>
+                    <textarea v-model="commentMsg"></textarea>
                 </li>
                 <li>
-                    <mt-button type="primary" size="large">发表评论</mt-button>
+                    <mt-button type="primary" size="large" @click="commentSubmit">发表评论</mt-button>
                 </li>
                 <li class="photo-comment">
                     <div>
@@ -37,7 +37,8 @@ export default {
         return {
             page: '1',  // 组件内控制页码
             msgs: {},  // 数据
-            isBtnShow: true
+            isBtnShow: true,
+            commentMsg: '' // 用户输入的评论
         }
     },
     props: ['cid'],
@@ -64,6 +65,25 @@ export default {
                     this.page++
                 })
                 .catch(err => console.log('获取评论失败', err))
+        },
+        // 发表评论
+        commentSubmit () {
+            if (this.commentMsg.trim() === '') {
+                this.$toast('评论不能为空！')
+            }
+            this.$axios
+                .post('postcomment/'+ this.cid, 'content=' + this.commentMsg)
+                .then( res => {
+                    // 发表之后，清空评论框
+                    this.commentMsg = ''
+                    // 加载第一页的数据，就是最新的数据
+                    this.page = 1
+                    this.loadMore()
+
+                })
+                .catch( err => {
+                    console.log('发表评论失败', err)
+                })
         }
     }
 }

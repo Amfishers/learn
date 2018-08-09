@@ -39,6 +39,19 @@ Vue.filter('relativeTime', function(data) {
 
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = 'https://www.sinya.online/api/'
+// 配置拦截器,用于通用的loading
+Axios.interceptors.request.use(function(config) {
+  MintUI.Indicator.open({
+    text: '完美加载中...',
+    // spinnerType: 'fading-circle'
+  });
+  return config
+})
+// 关闭loading
+Axios.interceptors.response.use(function(response) {
+  MintUI.Indicator.close()
+  return response
+})
 // 安装插件，注册全局组件及挂载属性
 Vue.use(MintUI)
 // 安装图片预览插件

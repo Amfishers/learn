@@ -79,7 +79,7 @@ export default {
                     // 加载第一页的数据，就是最新的数据
                     this.page = 1
                     this.loadMore()
-
+                    
                 })
                 .catch( err => {
                     console.log('发表评论失败', err)

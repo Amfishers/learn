@@ -47,7 +47,10 @@ export default {
           src: require("../../assets/images/goodsShow.png"),
           title: "商品展示",
           router: {
-              name: 'news.list'
+              name: 'goods.list',
+              query: {
+                id: 1
+              }
           }
         },
         {

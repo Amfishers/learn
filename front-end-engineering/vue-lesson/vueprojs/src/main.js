@@ -18,6 +18,8 @@ import MyLi from '@/components/Common/MyLi'
 import MyUl from '@/components/Common/MyUl'
 import NavBar from '@/components/Common/NavBar'
 import Comment from '@/components/Common/Comment'
+// 轮播图
+import MySwipe from '@/components/Common/MySwipe'
 // 图片预览插件
 import VuePreview from 'vue-preview'
 // 注册全局组件
@@ -25,6 +27,7 @@ Vue.component(MyUl.name, MyUl)
 Vue.component(MyLi.name, MyLi)
 Vue.component(NavBar.name, NavBar)
 Vue.component(Comment.name, Comment)
+Vue.component(MySwipe.name, MySwipe)
 // 定义moment全局日期过滤器
 import Moment from 'moment'
 // 设置语言
@@ -35,6 +38,9 @@ Vue.filter('converTime', function(data, formatStr) {
 })
 Vue.filter('relativeTime', function(data) {
   return Moment(data).fromNow()
+})
+Vue.filter('converStr', function(str, count) {
+  return str.subString(0, count) + '...'
 })
 
 Vue.prototype.$axios = Axios

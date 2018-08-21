@@ -14,7 +14,7 @@
       </mt-tab-item>
       <mt-tab-item id="shopcart">
         <img @click="changeHash" slot="icon" src="./assets/images/shopcart.png">
-        shopcart
+        shopcart<mt-badge type="error" size="small" v-show="hasNum">{{carNum}}</mt-badge>
       </mt-tab-item>
       <mt-tab-item id="search">
         <img @click="changeHash" slot="icon" src="./assets/images/find.png">
@@ -25,12 +25,25 @@
 </template>
 
 <script>
+
+import EventBus from "@/EventBus"
 export default {
   name: 'App',
   data () {
     return {
-      selected: ''
+      selected: '',  // 选中的菜单
+      carNum:  null,  // 添加购物车的数量
+      hasNum: false
     }
+  },
+  created () {
+    EventBus.$on('addShopCart', (data) => {
+      // 这里使用箭头函数，是因为箭头函数可以获取的 this 是我们期望的当前这个组件
+      this.carNum += parseInt(data)
+      this.$nextTick(() => {
+        this.hasNum = this.carNum > 0 ? true : false
+      })
+    })
   },
   methods: {
     changeHash () {

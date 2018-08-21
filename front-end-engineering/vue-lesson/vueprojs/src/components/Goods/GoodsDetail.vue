@@ -9,7 +9,7 @@
                 </span></li>
                 <li class="price-li">市场价：
                     <s>￥{{goodsInfo.market_price}}</s> 销售价：<span>￥{{goodsInfo.sell_price}}</span></li>
-                <li class="number-li">购买数量：<span>-</span><span>1</span><span>+</span></li>
+                <li class="number-li">购买数量：<span @click="substract">-</span><span>{{pickNum}}</span><span @click="add">+</span></li>
                 <li>
                     <mt-button type="primary">立即购买</mt-button>
                     <mt-button type="danger" @click="insetBall">加入购物车</mt-button>
@@ -42,12 +42,14 @@
     </div>
 </template>
 <script>
+import EventBus from "@/EventBus"
 export default {
     data () {
         return {
             goodsId: '',  // 商品的id
             goodsInfo: {},  // 商品详情
             isExist: false, // 小球是否离开
+            pickNum: 1, // 加入购物车数量
         }
     },
     created () {
@@ -67,6 +69,18 @@ export default {
         },
         afterEnter() {
             this.isExist = false  // 移除元素
+        
+            // 通知APP组件添加小球数量
+            EventBus.$emit('addShopCart', this.pickNum)
+
+        },
+        substract() {
+            if(this.pickNum <= 1)  return
+            this.pickNum --
+        },
+        add() {
+            if(this.pickNum >= this.goodsInfo.stock_quantity)  return
+            this.pickNum ++
         }
     }
 }

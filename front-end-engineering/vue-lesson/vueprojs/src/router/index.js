@@ -77,6 +77,12 @@ export default new Router({
       path: '/goods/detail/:id',
       name: 'goods.detail',
       component: GoodsDetail
+    },
+    // 商品图文介绍,复用新闻详情组件
+    {
+      path: '/goods/photo/info',
+      name: 'photo.info',
+      component: NewsDetail
     }
   ]
 })

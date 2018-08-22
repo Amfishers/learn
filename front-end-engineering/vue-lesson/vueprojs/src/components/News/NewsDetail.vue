@@ -1,6 +1,6 @@
 <template>
   <div class="new-detail">
-    <nav-bar :title="newsDetail.title" />
+    <nav-bar :title="title" />
     <div class="news-title">
       <p>{{newsDetail.title}}</p>
       <div>
@@ -14,24 +14,46 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
-      newsDetail: {}   // 新闻详情
-    }
+      newsDetail: {}, // 新闻详情
+      title: ''
+    };
   },
   created() {
     // 获取路由查询
     let id = this.$route.query.id;
-    this.$axios.get('getnew/' + id)
-    .then(res => {
-      console.log(res)
-      this.newsDetail = res.data.message[0];
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    this.$axios
+      .get("getnew/" + id)
+      .then(res => {
+        this.newsDetail = res.data.message[0];
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
-}
+  beforeRouteEnter(to, from, next) {
+    console.log(to);
+    console.log(from);
+    let title = ''
+    if(from.name ==  null) {
+      if(to.name === 'news.detail') {
+        title = '新闻详情'
+      }else if(to.name === 'photo.info') {
+        title = '商品图文介绍'
+      }
+    }else if(from.name === 'news.list') {
+      title = '新闻详情'
+    }else if(from.name === 'goods.detail') {
+      title = '商品图文介绍'
+    }
+
+    // 最终都放行，打不了复制一个title 为空串
+    next(vm => {
+      vm.title = title  //  vm 就是未来组件对象的this
+    })
+  }
+};
 </script>
 <style>
 .new-detail {

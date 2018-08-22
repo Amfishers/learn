@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <nav-bar title="商品详情"></nav-bar>
+        <nav-bar title="商品详情" />
         <my-swipe time="4000" :url=" 'getthumimages/' + goodsId" />
         <div class="product-desc">
             <ul>
@@ -32,7 +32,7 @@
         <div class="product-info">
             <ul>
                 <li>
-                    <mt-button type="primary" size="large" plain>图文介绍</mt-button>
+                    <mt-button type="primary" size="large" plain @click="showPhotoInfo">图文介绍</mt-button>
                 </li>
                 <li>
                     <mt-button type="danger" size="large" plain>商品评论</mt-button>
@@ -81,8 +81,18 @@ export default {
         add() {
             if(this.pickNum >= this.goodsInfo.stock_quantity)  return
             this.pickNum ++
+        },
+        // 图文介绍
+        showPhotoInfo () {
+            // 编程导航去哪里
+            this.$router.push({
+                name: 'photo.info',
+                query: {
+                    id: this.goodsId
+                }
+            })
         }
-    }
+    },
 }
 </script>
 <style scoped>

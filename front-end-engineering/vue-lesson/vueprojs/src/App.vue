@@ -25,8 +25,8 @@
 </template>
 
 <script>
-
 import EventBus from "@/EventBus"
+import GoodsTools from "@/GoodsTools"
 export default {
   name: 'App',
   data () {
@@ -37,6 +37,11 @@ export default {
     }
   },
   created () {
+    // 初始化小球的数量
+    var totalNum = GoodsTools.getTotalCount()
+    this.carNum = totalNum
+    this.hasNum = totalNum !== 0 ? true : false
+
     EventBus.$on('addShopCart', (data) => {
       // 这里使用箭头函数，是因为箭头函数可以获取的 this 是我们期望的当前这个组件
       this.carNum += parseInt(data)
@@ -44,6 +49,7 @@ export default {
         this.hasNum = this.carNum > 0 ? true : false
       })
     })
+
   },
   methods: {
     changeHash () {

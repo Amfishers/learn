@@ -10,6 +10,7 @@ import PhotoList from '@/components/Photo/PhotoList'
 import PhotoDetail from '@/components/Photo/PhotoDetail'
 import GoodsList from '@/components/Goods/GoodsList'
 import GoodsDetail from '@/components/Goods/GoodsDetail'
+import GoodsComment from '@/components/Goods/GoodsComment'
 
 Vue.use(Router)
 
@@ -83,6 +84,12 @@ export default new Router({
       path: '/goods/photo/info',
       name: 'photo.info',
       component: NewsDetail
+    },
+    // 商品评论
+    {
+      path: '/goods/comment',
+      name: 'goods.comment',
+      component: GoodsComment
     }
   ]
 })

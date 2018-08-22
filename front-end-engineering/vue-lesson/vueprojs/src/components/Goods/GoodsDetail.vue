@@ -35,7 +35,7 @@
                     <mt-button type="primary" size="large" plain @click="showPhotoInfo">图文介绍</mt-button>
                 </li>
                 <li>
-                    <mt-button type="danger" size="large" plain>商品评论</mt-button>
+                    <mt-button type="danger" size="large" plain @click="GoodsComment">商品评论</mt-button>
                 </li>
             </ul>
         </div>
@@ -43,6 +43,8 @@
 </template>
 <script>
 import EventBus from "@/EventBus"
+import GoodsTools from "@/GoodsTools"
+
 export default {
     data () {
         return {
@@ -72,6 +74,11 @@ export default {
         
             // 通知APP组件添加小球数量
             EventBus.$emit('addShopCart', this.pickNum)
+            //添加到本地存储
+            GoodsTools.add({
+                id: this.goodsInfo.id,
+                num: this.pickNum
+            })
 
         },
         substract() {
@@ -87,6 +94,16 @@ export default {
             // 编程导航去哪里
             this.$router.push({
                 name: 'photo.info',
+                query: {
+                    id: this.goodsId
+                }
+            })
+        },
+        // 显示商品详情
+        GoodsComment () {
+            // 编程导航
+            this.$router.push({
+                name: 'goods.comment',
                 query: {
                     id: this.goodsId
                 }

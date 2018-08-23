@@ -1,0 +1,4 @@
+1: npm i -g json-server
+2: 创建 db.json 文件
+3: 在此处打开命令行窗口 json-server --watch ./db.json
+4: 修改shopcart.vue 中的请求url

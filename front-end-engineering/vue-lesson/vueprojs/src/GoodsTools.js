@@ -6,20 +6,16 @@ obj.getGoodsList = function() {
 }
 
 // 保存商品
-obj.setGoods = function (goodsList) {
+obj.saveGoods = function (goodsList) {
   // 本地存储    
   window.localStorage.setItem('goodsList', JSON.stringify(goodsList))
 }
-
 
 // 添加商品的时候 写法是这样的
 //  GoodsTools.add({
 //    id: xxx,
 //    num: xxx
 //  })
-//
-//
-//
 //
 
 // 新增一个商品
@@ -32,7 +28,7 @@ obj.add = function (goods) {
     goodsList[goods.id] = goods.num
   }
   // 保存数据
-  this.setGoods(goodsList)
+  this.saveGoods(goodsList)
 }
 
 // 获取购物车数量总数

@@ -22,7 +22,7 @@
         <div class="show-price">
             <div class="show-1">
                 <p>总计(不含运费):</p>
-                <span>已经选择商品1件，总价￥888元</span>
+                <span>已经选择商品{{payment.count}}件，总价￥{{payment.price}}元</span>
             </div>
             <div class="show-2">
                 <mt-button type="danger" size="large">去结算</mt-button>
@@ -125,6 +125,22 @@ export default {
         .catch(err => {
             console.log('购物车数据异常', err)
         })
+    },
+    computed: {
+        payment () {
+            let price = 0;
+            let count = 0;
+            this.shopcart.forEach(goods => {
+                if(goods.isSelected) {
+                    price += goods.sell_price * goods.num
+                    count += goods.num
+                }
+            })   
+            return {
+                price,
+                count
+            }
+        }
     },
     methods: {
       add(goods) {

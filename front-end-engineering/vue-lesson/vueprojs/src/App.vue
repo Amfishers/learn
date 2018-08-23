@@ -1,8 +1,11 @@
 <template>
   <div>
     <mt-header fixed title="信息管理系统"></mt-header>
-
-    <router-view class="all-main"/>
+    <!-- 添加过度 "out-in"能够让元素先完成过度 之后新元素再进入-->
+    <transition name="rv" mode="out-in">
+      <router-view class="all-main"/>
+    </transition>
+    <!-- 添加过度 -->
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="home">
         <img @click="changeHash" slot="icon" src="./assets/images/index.png">
@@ -78,5 +81,11 @@ export default {
 <style>
 .all-main {
   margin-bottom: 55px;
+}
+.rv-enter-active, .rv-leave-active {
+  transition: opacity .3s;
+}
+.rv-enter, .rv-leave-to /* .rv-leave-active 在低于版本 2.1.8 中 */ {
+  opacity: 0;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="pro-loadmore">
+    <div class="pro-loadmore" :style="{ height:boxHeight }">   <!-- 不知道为什么mounted之后 height不会改变  -->
         <nav-bar title="商品展示" />
         <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" @top-status-change="handleTopChange" :auto-fill="false" :bottom-all-loaded="isAllLoaded" ref="loadmore">
             <!--{:all-fill="false" 如果数据没有填充满页面，就会出现loadBottom一直加载 }-->
@@ -39,17 +39,31 @@
 // <img :src="ImgSrc" />
 
   export default {
+    props: ['apprefs'],
     data() {
       return {
         topStatus: '',
         goodsList: [],  // 商品列表数据
         page: '1',  // 页码
         isAllLoaded: false,  // 是否全部加载完毕
+        boxHeight: null,  // 父盒子高度 
       };
     },
     created() {
         this.page = this.$route.query.id || '1'
         this.loadMoreData(this.page)
+    },
+    mounted() {
+        // 装载数据完毕   接收apprefs appHeader appFooter
+        // 公式： 设备高度 - 头 - 尾 =  中间的高度（loadmore父元素的高度）
+        let headerHeight = this.apprefs.appHeader.$el.offsetHeight
+        let footerHeight = this.apprefs.appFooter.$el.offsetHeight
+        console.log('headerHeight',headerHeight)
+        console.log('footerHeight',footerHeight)
+        console.log('window.innerHeight',window.innerHeight)
+        // 因为我的loadmore的div是绝对位置，所以 应该使用 window.innerHeight 而不是 document.body.clientHeight
+        this.boxHeight = window.innerHeight - headerHeight - footerHeight
+        console.log(this.boxHeight)
     },
     methods: {
       handleTopChange(status) {

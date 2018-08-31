@@ -1,12 +1,12 @@
 <template>
   <div>
-    <mt-header fixed title="信息管理系统"></mt-header>
+    <mt-header fixed title="信息管理系统" ref="appHeader"></mt-header>
     <!-- 添加过度 "out-in"能够让元素先完成过度 之后新元素再进入-->
     <transition name="rv" mode="out-in">
-      <router-view class="all-main"/>
+      <router-view class="all-main" :apprefs="$refs"/>   <!-- 这样写就可以在内部组件里面获取 外部组件的信息 -->
     </transition>
     <!-- 添加过度 -->
-    <mt-tabbar v-model="selected" fixed>
+    <mt-tabbar v-model="selected" fixed ref="appFooter">
       <mt-tab-item id="home">
         <img @click="changeHash" slot="icon" src="./assets/images/index.png">
         home        

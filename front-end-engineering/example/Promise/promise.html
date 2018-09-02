@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="promise.js"></script>
+    <script>
+    
+
+        // 原本希望根据顺序输出 1 2 3，只是间隔不一样。but这样就直接输出。。。 3 2 1，显然不是我们期待的
+        // setTimeout(function(){
+        //     console.log(1)
+        // }, 3000)
+        // setTimeout(function(){
+        //     console.log(2)
+        // }, 2000)
+        // setTimeout(function(){
+        //     console.log(3)
+        // }, 1000)
+        
+            
+        // 改成es6 的 promise
+        new Promise(function(resolve, reject){
+            setTimeout(function(){
+                console.log(1);
+                resolve();
+            }, 3000)
+        })
+        .then(function(){
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    console.log(2);
+                    resolve()
+                }, 1000)
+            })
+        })
+        .then(function(){
+            return new Promise(function(resolve, reject){
+                setTimeout(function(){
+                    console.log(3);
+                    resolve()
+                }, 2000)
+            })
+        })
+        .then(function(){
+            console.log('输出完成');
+        })
+
+
+
+
+
+
+    </script>
+</body>
+</html>

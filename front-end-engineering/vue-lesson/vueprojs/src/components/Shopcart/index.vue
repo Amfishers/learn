@@ -44,7 +44,7 @@ export default {
         let ids = Object.keys(goodsList).join(',')
         // 因为服务器问题，'goods/getshopcarlist/'+ ids 这个接口暂时取不到数据
         // 所以读取根目录的 补充db的操作.txt 说明，json-server 一定要启动才能跑动
-        this.$axios.get('http://localhost:3000/getshopcarlist?myid_like=8')
+        this.$axios.get('goods/getshopcarlist/'+ ids)
         .then(res => {
             /* 这样写 并没有办法能触发vue的双向数据绑定
             this.shopcart = res.data
@@ -109,16 +109,16 @@ export default {
             */
             
             // 给this.shopcart添加属性
-            res.data.forEach( goods => {
+            res.data.message.forEach( goods => {
               // 判断是否有该商品
-              if(goodsList[goods.myid]) {
-                goods.num = goodsList[goods.myid]
+              if(goodsList[goods.id]) {
+                goods.num = goodsList[goods.id]
               }
               // 不管有没有都需要打钩
               goods.isSelected = true
             })
 
-            this.shopcart = res.data
+            this.shopcart = res.data.message
 
 
         })
@@ -147,7 +147,7 @@ export default {
         goods.num ++
       },
       substract(goods) {
-        goods.num --
+        if(goods.num)  goods.num --
       },
       del (index) {
         this.shopcart.splice(index, 1)

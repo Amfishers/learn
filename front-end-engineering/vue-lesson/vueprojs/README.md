@@ -70,6 +70,29 @@ __建议： 组件负责自己的样式，全局都可以控制__
 3、对象数据结构是否一致
 
 
+#### 打包的js 按需加载   (路由懒加载)[https://router.vuejs.org/zh/guide/advanced/lazy-loading.html]
+安装插件 syntax-dynamic-import，并且 .babelrc 配置
+
+{
+  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+
+
+``` 
+结合这两者，这就是如何定义一个能够被 Webpack 自动代码分割的异步组件。
+
+const Foo = () => import('./Foo.vue')
+在路由配置中什么都不需要改变，只需要像往常一样使用 Foo：
+
+const router = new VueRouter({
+  routes: [
+    { path: '/foo', component: Foo }
+  ]
+})
+``` 
+所以在 router下的 index.js 文件所import的文件 进行修改
+
+
 #### 总结
 
 - EventBus 就是一个new Vue 

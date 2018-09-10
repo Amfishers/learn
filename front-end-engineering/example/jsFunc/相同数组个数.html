@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    
+function totalArr(arry) {
+
+  var arr = []  
+  var result = arry
+  result.sort()
+  for (var i = 0; i < result.length;) {
+    var count = 0;
+    for (var j = i; j < result.length; j++) {
+      if (result[i] === result[j]) {
+        count++;
+      }
+    }
+    var newArr = []
+    newArr.push(result[i], count)
+    arr.push(newArr)
+    i+=count;
+  }
+  return arr;
+  
+}
+var resultArr = ['北京', '北京', '北京', '上海', '广州', '广州']
+var ss = totalArr(resultArr)
+console.log(ss)
+</script>
+    
+</body>
+</html>

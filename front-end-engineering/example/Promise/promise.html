@@ -27,28 +27,32 @@
         new Promise(function(resolve, reject){
             setTimeout(function(){
                 console.log(1);
-                resolve();
+                var data = 'first promise';
+                resolve(data);
             }, 3000)
         })
-        .then(function(){
+        .then(function(data){
+            console.log('第一次  then：', data)
             return new Promise(function(resolve, reject){
                 setTimeout(function(){
                     console.log(2);
-                    resolve()
+                    var data = 'second promise';
+                    resolve(data)
                 }, 1000)
             })
-        })
-        .then(function(){
+        }, function(err){ console.log(err) })
+        .then(function(data){
+            console.log('第二次  then：', data)
             return new Promise(function(resolve, reject){
                 setTimeout(function(){
                     console.log(3);
                     resolve()
                 }, 2000)
             })
-        })
+        }, function(err){ console.log(err) })
         .then(function(){
             console.log('输出完成');
-        })
+        }, function(err){ console.log(err) })
 
 
 

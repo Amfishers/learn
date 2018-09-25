@@ -1,11 +1,11 @@
 var PENDING = 'PENDING';
 var FULFILLED = 'FULFILLED';
 var REJECTED = 'REJECTED';
-var i = 1;
+// var i = 1;
 
 // 1: 构造函数Promise
 function Promise(fn) {
-    this.id = i++
+    // this.id = i++
     // 2. 构造函数内初始 状态Pending 和 value
     this.status = PENDING; // 状态是待发状态
     this.value = null;  // 初始值
@@ -19,6 +19,32 @@ function Promise(fn) {
 // 4. 结束回调函数， 执行then Promise.prototype.then 是函数
 // 5. then函数内不需要保存起成果或者失败的函数
 Promise.prototype = {
+    constructor: Promise, // 改变回来原型链
+    then: function(onfulfilled, onrejected) {
+        // 保存该函数
+        var obj = {
+            onfulfilled: onfulfilled,
+            onrejected: onrejected
+        }
+
+        // 新来一个Promise对象，让其存储这些
+        // 并且能根据不同的Promise去then
+        obj.promise = new this.constructor(function(){});
+        
+        // 保存起接下来的promise
+        // console.log(this)
+        // console.log(obj.promise)
+
+        // 建立上一个与下一个primise之间的关系
+        if(this.status === PENDING) {
+           this.deffered.push(obj); 
+        }
+
+        // 保证不报错， 未来不能return自己  需要换人
+        return obj.promise; // 下一个then的哥们
+
+    },
+    
     // 定义成功和失败的回调函数， 改变状态， 记录数据结果， 执行后续的行为
     resolve: function(data) {
         this.status = FULFILLED;
@@ -60,31 +86,6 @@ Promise.prototype = {
             p.deffered = task.promise.deffered;
         }
     },
-    constructor: Promise, // 改变回来原型链
-    then: function(onfulfilled, onrejected) {
-        // 保存该函数
-        var obj = {
-            onfulfilled: onfulfilled,
-            onrejected: onrejected
-        }
-
-        // 新来一个Promise对象，让其存储这些
-        // 并且能根据不同的Promise去then
-        obj.promise = new this.constructor(function(){});
-        
-        // 保存起接下来的promise
-        console.log(this)
-        console.log(obj.promise)
-
-        // 建立上一个与下一个primise之间的关系
-        if(this.status === PENDING) {
-           this.deffered.push(obj); 
-        }
-
-        // 保证不报错， 未来不能return自己  需要换人
-        return obj.promise; // 下一个then的哥们
-
-    }
 }
 
 

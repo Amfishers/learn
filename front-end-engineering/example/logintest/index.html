@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <form id="userForm" onkeydown="if(event.keyCode==13) return false;">
+    <input type="text" id="name" placeholder="输入用户名"> <br>
+    <input type="password" id="password" placeholder="输入密码"> <br>
+
+    <input type="submit" value="提交" id="subClick">
+  </form>
+
+  <script>
+  window.onload = function() {
+    var btn = document.getElementById('subClick');
+
+    btn.onclick = function(e) {
+      e.preventDefault()
+
+      var formData = new FormData();
+      var name = document.getElementById('name');
+      var paw = document.getElementById('password');
+      formData.append('name', name.value) 
+      formData.append('paw', paw.value)
+      console.log(formData)
+      
+      var xhr =  new XMLHttpRequest()
+      xhr.open('post', 'http://localhost:9998/user', true);
+      xhr.send(formData)
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4) {
+          if(xhr.status>=200 & xhr.status<=300) {
+            alert(xhr.responseText)
+          }
+          else {
+            alert('error')
+          }
+        }
+      }
+
+    }
+
+
+
+  }
+  </script>
+
+</body>
+</html>

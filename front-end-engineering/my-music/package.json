@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "art-template": "^4.13.1",
+    "koa": "^2.6.1",
+    "koa-art-template": "^1.1.1",
+    "mysql": "^2.16.0"
+  }
 }

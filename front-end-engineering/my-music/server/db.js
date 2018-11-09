@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const sqlOption = require('../config')
+const sqlOption = require('../config').db
 
 let pool = mysql.createPool(sqlOption)
 

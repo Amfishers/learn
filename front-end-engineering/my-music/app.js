@@ -2,6 +2,7 @@ const Koa = require('koa')
 const render = require('koa-art-template')
 const path = require('path')
 const koaStatic = require('koa-static')  // 路由解析
+const bodyParser = require('koa-bodyparser')
 const app = new Koa()
 
 // 渲染 koa-art-template 模板
@@ -23,6 +24,9 @@ app.use(async (ctx, next) => {
 })
 app.use(koaStatic('./public'))
 
+//处理请求体开始
+app.use(bodyParser())
+//处理请求体结束
 
 let router = require('./routes/user_router')
 

@@ -24,7 +24,8 @@ router.get('/register', (ctx, next) => {
 .get('/login', (ctx, next) => {
     ctx.render('login')
 })
-.post('/check_username', user_controller.checkUsername )
-.post('/do_register', user_controller.doRegister )
+.post('/check_username', user_controller.checkUsername )  // 检查用户名
+.post('/do_register', user_controller.doRegister )   // 注册用户
+.post('/do_login', user_controller.doLogin )   // 账户登陆
 
 module.exports = router

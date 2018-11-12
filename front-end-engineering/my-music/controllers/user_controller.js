@@ -18,7 +18,7 @@ exports.checkUsername = async (ctx) => {
 }
 
 // 注册
-exports.doRegister = async (ctx) => {
+exports.doRegister = async ctx => {
     // 1.接受请求体 ctx.request.body
     let { username, password, email } = ctx.request.body
     // 2.查询
@@ -38,3 +38,23 @@ exports.doRegister = async (ctx) => {
     ctx.body = { code: '001', msg: '注册成功'}
 }
 
+exports.doLogin = async ctx => {
+    // 接受用户的账户和密码
+    let { username, password, remember_me } = ctx.request.body
+    // 查询
+    let users = await user_db.sqlQuery('SELECT * FROM users where username =?', [username])
+    // 响应数据
+    if (users.length === 0) {
+        return ctx.body = { code: '002', msg: '用户名或密码错误'}
+    }
+    
+    let user = users[0]
+    console.log(users)
+    if (user.password != password) {
+        return ctx.body = { code: '002', msg: '用户名或密码错误' }
+    }
+
+    ctx.body = { code: '001', msg: '登陆成功！： ）'}
+
+}
+ 

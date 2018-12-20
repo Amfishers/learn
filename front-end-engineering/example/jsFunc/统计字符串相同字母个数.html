@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>统计字符串相同字母个数</title>
+</head>
+<body>
+    <script>
+    let str = 'aaabbbckksdmkkmjijioe'
+    
+    function dealStr(str) {
+        let obj = {}
+
+        for (let i = 0; i < str.length; i++) {
+            let v = str.charAt(i)
+            if (obj[v] && obj[v].value == v) {
+                ++obj[v].count
+            } else {
+                obj[v] = {
+                    count: 1,
+                    value: v
+                }
+            }
+        }
+        return obj
+    }
+
+    console.log( dealStr(str) )
+    </script>
+</body>
+</html>

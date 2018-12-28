@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大数字相加</title>
+</head>
+<body>
+
+    <h1>js能运算的只有 2的53次方（千万亿位） 9007199254740992（0x20000000000000）</h1>
+    <script>
+        function sumStrings(a, b) {
+            var res = '', c = 0;
+            a = a.split('');
+            b = b.split('');
+            console.log(a);
+            console.log(b);
+            while (a.length || b.length || c) {
+                c += ~~a.pop() + ~~b.pop();
+                res = c % 10 + res;
+                //console.log(res);
+                c = c > 9;
+            }
+            return res.replace(/^0+/, '');
+        }
+
+        console.log(sumStrings('123123123123', '45345345435'))
+    </script>
+    
+</body>
+</html>

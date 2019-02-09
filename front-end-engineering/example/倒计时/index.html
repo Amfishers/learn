@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Count down 倒计时</title>
+</head>
+<body>
+距离2020年1月1日0时0分0秒还有<span id="msg"></span>
+
+<script>
+window.onload = function() {
+    var msg = document.getElementById('msg')
+
+    function setTime() {
+
+        // 统一转化为时间戳
+        var targetTime = new Date(2020, 1 - 1, 1, 0, 0, 0).getTime()
+
+        var nowTime = new Date().getTime()
+
+        var timeDiff = targetTime - nowTime
+        if (timeDiff <= 0) return msg.innerHTML = '时间到'
+        // 毫秒 转化为 秒
+        timeDiff = Math.round(timeDiff / 1000)
+        // 毫秒转化为天数
+        // var day = parseInt(timeDiff / (60 * 60 * 24))
+        var day = parseInt(timeDiff / 3600 / 24)
+        // 毫秒取小时
+        var hour = parseInt(timeDiff / 3600 % 24)
+        var minute = parseInt(timeDiff / 60 % 60 )
+        var second = parseInt(timeDiff % 60 )
+
+        // 比较好理解的写法
+        // day = Math.floor(times / (60 * 60 * 24));
+        // hour = Math.floor(times / (60 * 60)) - (day * 24);
+        // minute = Math.floor(times / 60) - (day * 24 * 60) - (hour * 60);
+        // second = Math.floor(times) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+
+        msg.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒'
+
+    }
+
+    setInterval(setTime, 1000);
+}
+</script>
+    
+</body>
+</html>

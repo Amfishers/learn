@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="chn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三角形</title>
+</head>
+<body>
+<h1 style="text-align: center;"> 三角形 </h1>
+<style>
+    .box {
+        margin: 40px auto;
+        width: 10px;
+        height: 10px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: #333 #eee #000 red;
+    }
+</style>
+<div class="box"></div>
+
+
+<style>
+/*向上*/
+.triangle_border_up{
+width:0;
+height:0;
+border-width: 0 15px 30px 15px;
+border-style:solid;
+/* ie6 solid没办法显示透明，所以使用 dashed（虚线）*/
+/* border-style:dashed dashed solid dashed; */
+border-color: transparent transparent #333 transparent;/*透明 透明 灰*/
+margin:40px auto;
+position:relative;
+}
+</style>
+
+<div class="triangle_border_up"></div>
+
+
+</body>
+</html>

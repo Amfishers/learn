@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>拖拽--面向对象</title>
+</head>
+<style type="text/css">
+#div1{ width: 200px; height: 200px; background: #000; color: #fff; position: absolute; }
+#div2{ width: 200px; height: 200px; background: #CCC; position: absolute; }
+</style>
+<script src="js/Drag.js" type="text/javascript"></script>
+<script src="js/LimitDrag.js" type="text/javascript"></script>
+<script type="text/javascript">
+window.onload=function(){
+	new Drag("div1");
+	new LimitDrag("div2");
+}
+
+
+
+
+</script>
+<body>
+
+
+<div id="div1">拖拽块1</div>
+<div id="div2">拖拽块2</div>
+	
+</body>
+</html>

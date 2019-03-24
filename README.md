@@ -2,7 +2,7 @@
 
 #### 版权声明：本文为博主原创文章，未经博主允许不得转载。
 
-如果你想跟我一起练习有趣题目，#### [跟我来](https://github.com/Amfishers/awesome-frontend))  
+如果你想跟我一起练习有趣题目，[跟我来](https://github.com/Amfishers/awesome-frontend)
 
 大致目录如下，文章坚持周更💪
 

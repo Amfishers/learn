@@ -21,6 +21,44 @@ let person = {
 
 ECMAscript中有两种属性： 数据属性和访问器属性
 
+[[Configurable]]: 表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器的属性 。默认值是true
+
+ [[Enumerable]]: 表示能否通过for-in 循环返回属性。默认是 true
+
+[[Writable]]: 表示能否修改属性的值。默认是 true
+
+[[Value]]: 包含这个属性的数据值。默认是 undefined
+
+举个例子
+
+```javascript
+var person = {
+    name: 'fishers'
+}
+```
+
+在这个例子中 [[Configurable]].  [[Enumerable]]].  [[Writable]] 特性都被设置为true， 而 [[Value]] 特性被设置为指定的值 'fishers'。 要修改这些默认属性的特性，就需要用 Object.definedProperty() 方法。（Vue双向绑定原理 Object.definedProperty() ）
+
+
+
+该方法接收三个参数： 属性所在的对象，属性的名字和一个描述符对象。
+
+其中 描述符(descriptor)对象的属性必须是： configurable、enumerable、writable、value
+
+但要注意的是：
+
+- Writable 设置为false之后，value 设置会无效，而且严格模式下 修改value值会报错
+- 多次调用 Object.definedProperty() 方法修改同一个属性，但在把 configurable 特性设置为 false 之后就会有限制了
+- 在调用 Object.definedProperty() 方法创建一个新的属性时，如果不指定， configurable、enumerable、writable 特性默认是 false
+
+
+
+
+
+
+
+
+
 
 
 #### 创建对象
@@ -58,4 +96,8 @@ var person1 = New Person('fisher', 18)
 - 没有显示的创建对象
 - 直接将属性与方法赋予this对象
 - 没有return
+
+
+
+
 

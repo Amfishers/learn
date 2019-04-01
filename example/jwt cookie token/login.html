@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>登录页面</title>
+</head>
+<body>
+  <button onclick="goIndex()">使用ajax查看index</button>
+
+  <script type="text/javascript" src="./jquery.js"></script>
+  <script type="text/javascript">
+  var token;
+    $.ajaxSetup({
+      beforeSend:function (xhr) {
+        console.log(token)
+        if(token) xhr.setRequestHeader('authorization','bearer '+ token);
+      },
+      complete:function (xhr) {
+        token = xhr.getResponseHeader('token');
+        console.log(token)
+      }
+    });
+
+    $.ajax({
+      url:'/login',
+      type:'get',
+      success:function (data) {
+        console.log(data);
+      }
+    });
+
+    function goIndex () {
+       $.ajax({
+        url:'/index',
+        type:'get',
+        success:function (data) {
+          console.log(data);
+        }
+      });
+    }
+
+
+  </script>
+</body>
+</html>

@@ -41,11 +41,10 @@ app.use(jwt({ secret: 'shhhhh',passthrough:true }).unless({path:[/^\/public/]}))
 
 - CSRF (Cross-site request forgery 跨域站点伪造) 伪造请求
 
-\- 试想: 用户不小心进入黑客准备好的页面,页面内隐藏了一个表单提交
+- 试想: 用户不小心进入黑客准备好的页面,页面内隐藏了一个表单提交
 
-  \- 提交时携带用户的数据.. 
-
-  \- 能通过什么???   用户的cookie数据
+  - 提交时携带用户的数据.. 
+  - 能通过什么???   用户的cookie数据
 
 
 

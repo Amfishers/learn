@@ -1,0 +1,20 @@
+{
+  "name": "test-jwt-cookie-token",
+  "version": "1.0.0",
+  "description": "- cookie就是一个区分不同浏览器的标识",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node ./app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-jwt": "^3.5.1",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "koa-static": "^5.0.0"
+  }
+}
